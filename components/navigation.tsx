@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -19,20 +19,20 @@ const navigationItems = [
   { name: "Sponsors", href: "/sponsors" },
   { name: "Join Us", href: "/join" },
   { name: "Contact", href: "/contact" },
-]
+];
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav
@@ -48,7 +48,7 @@ export function Navigation() {
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative h-10 w-10 transition-transform duration-300 group-hover:scale-110">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mars_rover_1-eOMKJSkn4YwCVsyKyUvwLrGMkg1hOo.png"
+                src="/mars_rover_1.png"
                 alt="MIST Mongol Barota Logo"
                 fill
                 className="object-contain"
@@ -58,14 +58,18 @@ export function Navigation() {
               <div className="text-lg font-bold text-foreground transition-colors duration-300 group-hover:text-primary">
                 MIST
               </div>
-              <div className="text-sm font-semibold text-primary">MONGOL BAROTA</div>
+              <div className="text-sm font-semibold text-primary">
+                MONGOL BAROTA
+              </div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navigationItems.map((item, index) => {
-              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/" && pathname.startsWith(item.href));
               return (
                 <Link
                   key={item.name}
@@ -82,11 +86,13 @@ export function Navigation() {
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                   )}
                 </Link>
-              )
+              );
             })}
-          </div>
+          </div>;
 
-          {/* CTA Button */}
+          {
+            /* CTA Button */
+          }
           <div className="hidden md:flex items-center space-x-4">
             <Button
               asChild
@@ -94,9 +100,11 @@ export function Navigation() {
             >
               <Link href="/support">Become a Sponsor</Link>
             </Button>
-          </div>
+          </div>;
 
-          {/* Mobile Menu */}
+          {
+            /* Mobile Menu */
+          }
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
               <Button
@@ -111,7 +119,9 @@ export function Navigation() {
             <SheetContent side="right" className="w-80">
               <div className="flex flex-col space-y-4 mt-8">
                 {navigationItems.map((item, index) => {
-                  const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+                  const isActive =
+                    pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(item.href));
                   return (
                     <Link
                       key={item.name}
@@ -123,12 +133,14 @@ export function Navigation() {
                       }`}
                       onClick={() => setIsOpen(false)}
                       style={{
-                        animation: isOpen ? `slideInRight 0.3s ease-out ${index * 50}ms both` : "none",
+                        animation: isOpen
+                          ? `slideInRight 0.3s ease-out ${index * 50}ms both`
+                          : "none",
                       }}
                     >
                       {item.name}
                     </Link>
-                  )
+                  );
                 })}
                 <div className="pt-4 border-t">
                   <Button
@@ -142,9 +154,9 @@ export function Navigation() {
                 </div>
               </div>
             </SheetContent>
-          </Sheet>
+          </Sheet>;
         </div>
       </div>
     </nav>
-  )
+  );
 }

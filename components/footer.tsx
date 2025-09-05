@@ -1,8 +1,8 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Facebook, Instagram, Youtube, Mail, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Facebook, Instagram, Mail, MapPin, Youtube } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const footerLinks = {
   "Quick Links": [
@@ -29,7 +29,7 @@ const footerLinks = {
     { name: "Partnership", href: "/sponsors/partnership" },
     { name: "Contact Us", href: "/contact" },
   ],
-}
+};
 
 const socialLinks = [
   {
@@ -52,7 +52,7 @@ const socialLinks = [
     href: "mailto:mars.rover.mist@gmail.com",
     icon: Mail,
   },
-]
+];
 
 export function Footer() {
   return (
@@ -64,27 +64,33 @@ export function Footer() {
             <Link href="/" className="flex items-center space-x-3">
               <div className="relative h-12 w-12 bg-white rounded-full p-2">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mars_rover_1-eOMKJSkn4YwCVsyKyUvwLrGMkg1hOo.png"
-                  alt="MIST Mongol Barota Logo"
-                  fill
+                  src="/mars_rover_crop.png"
+                  alt="MIST Mongol Barota Logo" // 'Barota' is an intentional team name
+                  width={70}
+                  height={70}
                   className="object-contain"
+                  priority
                 />
               </div>
               <div>
                 <div className="text-xl font-bold">MIST</div>
-                <div className="text-lg font-semibold text-primary">MONGOL BAROTA</div>
+                <div className="text-lg font-semibold text-primary">
+                  MONGOL BAROTA {/* 'BAROTA' is an intentional team name */}
+                </div>
               </div>
             </Link>
 
             <p className="text-secondary-foreground/80 max-w-md text-pretty">
-              Pioneering Mars exploration from Bangladesh. We are MIST's premier robotics team, competing globally and
-              pushing the boundaries of space technology.
+              Pioneering Mars exploration from Bangladesh. We are MIST's premier
+              robotics team, competing globally and pushing the boundaries of
+              space technology.
             </p>
 
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm">
                 <MapPin className="w-4 h-4 text-primary" />
-                <span>Mirpur Cantonment, Dhaka-1216, Bangladesh</span>
+                <span>Mirpur Cantonment, Dhaka-1216, Bangladesh</span>{" "}
+                {/* 'Mirpur' is a valid location name */}
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Mail className="w-4 h-4 text-primary" />
@@ -94,8 +100,18 @@ export function Footer() {
 
             <div className="flex gap-4">
               {socialLinks.map((social) => (
-                <Button key={social.name} asChild variant="ghost" size="icon" className="hover:bg-primary/10">
-                  <Link href={social.href} target="_blank" rel="noopener noreferrer">
+                <Button
+                  key={social.name}
+                  asChild
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-primary/10"
+                >
+                  <Link
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <social.icon className="w-5 h-5" />
                     <span className="sr-only">{social.name}</span>
                   </Link>
@@ -127,17 +143,25 @@ export function Footer() {
         <Separator className="my-8 bg-secondary-foreground/20" />
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-secondary-foreground">© 2024 MIST Mongol Barota. All rights reserved.</div>
+          <div className="text-sm text-secondary-foreground">
+            © 2024 MIST Mongol Barota. All rights reserved.
+          </div>
           <div className="flex gap-6 text-sm">
-            <Link href="/privacy" className="text-secondary-foreground hover:text-primary transition-colors">
+            <Link
+              href="/privacy"
+              className="text-secondary-foreground hover:text-primary transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-secondary-foreground hover:text-primary transition-colors">
+            <Link
+              href="/terms"
+              className="text-secondary-foreground hover:text-primary transition-colors"
+            >
               Terms of Service
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
