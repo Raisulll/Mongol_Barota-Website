@@ -1,10 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
-  /* Updated color tokens to match MIST Mongol Barota branding with red/black theme */
+  /* MIST Mongol Barota branding with red/black theme - Light mode only */
   --background: oklch(1 0 0); /* White background */
   --foreground: oklch(0 0 0); /* Black text */
   --card: oklch(0.99 0.005 85.87); /* Light cream for cards */
@@ -38,42 +36,6 @@
   --sidebar-accent-foreground: oklch(1 0 0); /* White sidebar accent text */
   --sidebar-border: oklch(0.9 0 0); /* Light gray sidebar border */
   --sidebar-ring: oklch(0.55 0.22 25 / 0.5); /* Red sidebar focus ring */
-}
-
-.dark {
-  /* Dark mode tokens maintaining red/black theme */
-  --background: oklch(0.05 0 0); /* Very dark background */
-  --foreground: oklch(0.98 0 0); /* Light text */
-  --card: oklch(0.08 0 0); /* Dark card background */
-  --card-foreground: oklch(0.98 0 0); /* Light card text */
-  --popover: oklch(0.05 0 0); /* Dark popover */
-  --popover-foreground: oklch(0.98 0 0); /* Light popover text */
-  --primary: oklch(0.65 0.18 25); /* Lighter red for dark mode */
-  --primary-foreground: oklch(0.05 0 0); /* Dark text on red */
-  --secondary: oklch(0.15 0 0); /* Dark gray secondary */
-  --secondary-foreground: oklch(0.98 0 0); /* Light text on secondary */
-  --muted: oklch(0.15 0 0); /* Dark muted */
-  --muted-foreground: oklch(0.65 0 0); /* Medium gray muted text */
-  --accent: oklch(0.55 0.22 25); /* Red accent */
-  --accent-foreground: oklch(0.98 0 0); /* Light text on accent */
-  --destructive: oklch(0.65 0.18 25); /* Lighter red for destructive */
-  --destructive-foreground: oklch(0.05 0 0); /* Dark text on destructive */
-  --border: oklch(0.15 0 0); /* Dark border */
-  --input: oklch(0.15 0 0); /* Dark input */
-  --ring: oklch(0.65 0.18 25 / 0.5); /* Red focus ring */
-  --chart-1: oklch(0.55 0.22 25); /* Red for charts */
-  --chart-2: oklch(0.65 0.18 25); /* Light red for charts */
-  --chart-3: oklch(0.85 0.1 25); /* Very light red for charts */
-  --chart-4: oklch(0.45 0.26 25); /* Dark red for charts */
-  --chart-5: oklch(0.75 0.14 25); /* Medium red for charts */
-  --sidebar: oklch(0.08 0 0); /* Dark sidebar */
-  --sidebar-foreground: oklch(0.98 0 0); /* Light sidebar text */
-  --sidebar-primary: oklch(0.65 0.18 25); /* Light red sidebar primary */
-  --sidebar-primary-foreground: oklch(0.05 0 0); /* Dark sidebar primary text */
-  --sidebar-accent: oklch(0.55 0.22 25); /* Red sidebar accent */
-  --sidebar-accent-foreground: oklch(0.98 0 0); /* Light sidebar accent text */
-  --sidebar-border: oklch(0.15 0 0); /* Dark sidebar border */
-  --sidebar-ring: oklch(0.65 0.18 25 / 0.5); /* Red sidebar focus ring */
 }
 
 @theme inline {

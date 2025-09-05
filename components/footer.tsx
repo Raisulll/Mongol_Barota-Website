@@ -11,22 +11,20 @@ const footerLinks = {
     { name: "Competitions", href: "/competitions" },
     { name: "Achievements", href: "/achievements" },
   ],
-  Team: [
-    { name: "Current Team", href: "/team" },
-    { name: "Join Us", href: "/join" },
-    { name: "Alumni", href: "/team/alumni" },
-    { name: "Faculty", href: "/team/faculty" },
-  ],
+  // Team: [
+  //   { name: "Current Team", href: "/team" },
+  //   { name: "Join Us", href: "/join" },
+  //   { name: "Alumni", href: "/team/alumni" },
+  //   { name: "Faculty", href: "/team/faculty" },
+  // ],
   Resources: [
     { name: "Gallery", href: "/gallery" },
-    { name: "News & Media", href: "/news" },
-    { name: "Downloads", href: "/resources" },
+    { name: "News & Announcement", href: "/news" },
     { name: "Research Papers", href: "/resources/papers" },
   ],
   Support: [
     { name: "Become a Sponsor", href: "/sponsors" },
     { name: "Donate", href: "/support" },
-    { name: "Partnership", href: "/sponsors/partnership" },
     { name: "Contact Us", href: "/contact" },
   ],
 };
@@ -144,20 +142,17 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-secondary-foreground">
-            © 2024 MIST Mongol Barota. All rights reserved.
+            © 2025 MIST Mongol Barota. All rights reserved.
           </div>
-          <div className="flex gap-6 text-sm">
+          <div className="text-sm text-secondary-foreground">
+            Developed by{" "}
             <Link
-              href="/privacy"
+              href="https://www.linkedin.com/in/raisul-islam-rahad/"
               className="text-secondary-foreground hover:text-primary transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-secondary-foreground hover:text-primary transition-colors"
-            >
-              Terms of Service
+              Md Raisul Islam Rahad
             </Link>
           </div>
         </div>

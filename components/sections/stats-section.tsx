@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Trophy, Users, Zap, Globe } from "lucide-react"
-import { ScrollAnimation } from "@/components/scroll-animation"
-import { useEffect, useState, useRef } from "react"
+import { ScrollAnimation } from "@/components/scroll-animation";
+import { Card, CardContent } from "@/components/ui/card";
+import { Globe, Trophy, Users, Zap } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const stats = [
   {
@@ -30,65 +30,121 @@ const stats = [
     label: "International Competitions",
     description: "Representing Bangladesh globally",
   },
-]
+];
 
 function useCountUp(end: string, duration = 2000) {
-  const [count, setCount] = useState("0")
-  const [isVisible, setIsVisible] = useState(false)
+  // Set initial state based on the format of the end value
+  const getInitialValue = (endValue: string) => {
+    const match = endValue.match(/^(\D*)(\d+(?:\.\d+)?)(\D*)$/);
+    if (!match) return endValue;
+    const [, prefix, , suffix] = match;
+    return prefix + "0" + suffix;
+  };
+
+  const [count, setCount] = useState(() => getInitialValue(end));
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (!isVisible) return
+    console.log(
+      "useCountUp effect triggered, isVisible:",
+      isVisible,
+      "end:",
+      end
+    );
+    if (!isVisible) return;
 
-    const numericEnd = Number.parseFloat(end.replace(/[^\d.]/g, ""))
-    if (isNaN(numericEnd)) {
-      setCount(end)
-      return
+    // Extract numeric value and prefix/suffix
+    const match = end.match(/^(\D*)(\d+(?:\.\d+)?)(\D*)$/);
+
+    if (!match) {
+      // If no numeric value found, just set the end value
+      console.log("No numeric match found for:", end);
+      setCount(end);
+      return;
     }
 
-    let startTime: number
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
+    const [, prefix, numericStr, suffix] = match;
+    const numericEnd = Number.parseFloat(numericStr);
+    console.log(
+      "Animation starting for:",
+      end,
+      "numeric:",
+      numericEnd,
+      "prefix:",
+      prefix,
+      "suffix:",
+      suffix
+    );
 
-      const currentValue = progress * numericEnd
-      const suffix = end.replace(/[\d.]/g, "")
-      setCount(Math.floor(currentValue) + suffix)
+    if (isNaN(numericEnd)) {
+      setCount(end);
+      return;
+    }
+
+    let startTime: number;
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+
+      const currentValue = progress * numericEnd;
+
+      // Format the current value appropriately
+      let formattedValue: string;
+      if (numericStr.includes(".")) {
+        formattedValue = currentValue.toFixed(2);
+      } else {
+        formattedValue = Math.floor(currentValue).toString();
+      }
+
+      setCount(prefix + formattedValue + suffix);
 
       if (progress < 1) {
-        requestAnimationFrame(animate)
+        requestAnimationFrame(animate);
       } else {
-        setCount(end)
+        setCount(end);
       }
-    }
+    };
 
-    requestAnimationFrame(animate)
-  }, [end, duration, isVisible])
+    requestAnimationFrame(animate);
+  }, [end, duration, isVisible]);
 
-  return { count, setIsVisible }
+  return { count, setIsVisible };
 }
 
 function StatCard({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
-  const { count, setIsVisible } = useCountUp(stat.value)
-  const cardRef = useRef<HTMLDivElement>(null)
+  const { count, setIsVisible } = useCountUp(stat.value);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true)
+            setIsVisible(true);
+            observer.disconnect();
           }
-        })
+        });
       },
-      { threshold: 0.5 },
-    )
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
 
     if (cardRef.current) {
-      observer.observe(cardRef.current)
+      observer.observe(cardRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [setIsVisible])
+    // Fallback timeout to ensure animation triggers
+    const fallback = setTimeout(() => {
+      setIsVisible(true);
+    }, 1000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
+  }, [setIsVisible]);
 
   return (
     <ScrollAnimation delay={index * 100}>
@@ -112,7 +168,7 @@ function StatCard({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
         </CardContent>
       </Card>
     </ScrollAnimation>
-  )
+  );
 }
 
 export function StatsSection() {
@@ -121,9 +177,12 @@ export function StatsSection() {
       <div className="container mx-auto px-4">
         <ScrollAnimation>
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Leading Mars Rover Innovation</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+              Leading Mars Rover Innovation
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Our achievements speak to our commitment to excellence in robotics and space exploration
+              Our achievements speak to our commitment to excellence in robotics
+              and space exploration
             </p>
           </div>
         </ScrollAnimation>
@@ -135,5 +194,5 @@ export function StatsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

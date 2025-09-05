@@ -15,6 +15,8 @@ const navigationItems = [
   { name: "Competitions", href: "/competitions" },
   { name: "Achievements", href: "/achievements" },
   { name: "Team", href: "/team" },
+  { name: "News", href: "/news" },
+  { name: "Research", href: "/resources/papers" },
   { name: "Gallery", href: "/gallery" },
   { name: "Sponsors", href: "/sponsors" },
   { name: "Join Us", href: "/join" },
@@ -88,11 +90,9 @@ export function Navigation() {
                 </Link>
               );
             })}
-          </div>;
+          </div>
 
-          {
-            /* CTA Button */
-          }
+          {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
             <Button
               asChild
@@ -100,11 +100,9 @@ export function Navigation() {
             >
               <Link href="/support">Become a Sponsor</Link>
             </Button>
-          </div>;
+          </div>
 
-          {
-            /* Mobile Menu */
-          }
+          {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
               <Button
@@ -154,7 +152,7 @@ export function Navigation() {
                 </div>
               </div>
             </SheetContent>
-          </Sheet>;
+          </Sheet>
         </div>
       </div>
     </nav>

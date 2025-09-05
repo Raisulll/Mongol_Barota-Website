@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { Navigation } from "@/components/navigation";
+import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -60,6 +61,7 @@ export default function RootLayout({
           <main className="min-h-screen">{children}</main>
           <Footer />
           <Analytics />
+          <Toaster />
         </Suspense>
       </body>
     </html>
